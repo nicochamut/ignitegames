@@ -38,6 +38,10 @@ const popular_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${lastYe
 const upcoming_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
 const new_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
 
+//Game Details
+export const gameDetailsUrl = (game_id) => `${base_url}games?key=f04316d043714d6b9f293d0ecbd11853&/${game_id}`
+
+
 export const popularGamesUrl = () => {
   const url = `${base_url}${popular_games}`;
   return url;

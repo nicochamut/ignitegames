@@ -18,15 +18,41 @@ const Home = () => {
   const { popular, upComing, newGames } = useSelector((state) => state.games);
   return (
     <GameList>
-      <h2>Upcoming Games</h2>
+      <h2>-Upcoming Games</h2>
       <GameStyled>
         {upComing.map((game) => (
           <GameCard
             name={game.name}
             released={game.released}
             id={game.id}
-            key={game.id}
             image={game.background_image}
+            key={game.id}
+          />
+        ))}
+      </GameStyled>
+
+      <h2>Popular Games</h2>
+      <GameStyled>
+        {popular.map((game) => (
+          <GameCard
+            name={game.name}
+            released={game.released}
+            id={game.id}
+            image={game.background_image}
+            key={game.id}
+          />
+        ))}
+      </GameStyled>
+
+      <h2>New Games</h2>
+      <GameStyled>
+        {newGames.map((game) => (
+          <GameCard
+            name={game.name}
+            released={game.released}
+            id={game.id}
+            image={game.background_image}
+            key={game.id}
           />
         ))}
       </GameStyled>
@@ -44,7 +70,8 @@ const GameList = styled(motion.div)`
 const GameStyled = styled(motion.div)`
   min-height: 70vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-column-gap: 3rem;
   grid-row-gap: 5rem;
 `;
