@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-//REDUX SETUPs
+//REDUX SETUP
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./reducers";
 import { Provider } from "react-redux";

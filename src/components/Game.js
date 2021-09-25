@@ -1,30 +1,37 @@
 import React from "react";
+//Styling and Animation
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { smallImage } from "../util";
 //Redux
 import { useDispatch } from "react-redux";
-import loadDetail from "../actions/detailsAction";
-//Router
+import { loadDetail } from "../actions/detailAction";
 import { Link } from "react-router-dom";
+import { smallImage } from "../util";
+import { popup } from "../animations";
 
-
-const GameCard = ({ name, released, id, image }) => {
-  //Load Details Handler
+const Game = ({ name, released, image, id }) => {
   const stringPathId = id.toString();
+  //Load Detail Handler
   const dispatch = useDispatch();
   const loadDetailHandler = () => {
     document.body.style.overflow = "hidden";
     dispatch(loadDetail(id));
+    console.log(id);
   };
 
   return (
-    <StyledGame layoutId={stringPathId} onClick={loadDetailHandler}>
+    <StyledGame
+      variants={popup}
+      initial="hidden"
+      animate="show"
+      layoutId={stringPathId}
+      onClick={loadDetailHandler}
+    >
       <Link to={`/game/${id}`}>
-        <motion.h3 layout={`title ${stringPathId}`}>{name}</motion.h3>
+        <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
         <p>{released}</p>
         <motion.img
-          layoutId={`image${stringPathId}`}
+          layoutId={`image ${stringPathId}`}
           src={smallImage(image, 640)}
           alt={name}
         />
@@ -35,12 +42,13 @@ const GameCard = ({ name, released, id, image }) => {
 
 const StyledGame = styled(motion.div)`
   min-height: 30vh;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   background: #ff00001f;
   backdrop-filter: blur(3px);
-  overflow: hidden;
   text-align: center;
   border-radius: 1rem;
+  cursor: pointer;
+  overflow: hidden;
   img {
     width: 100%;
     height: 40vh;
@@ -48,4 +56,4 @@ const StyledGame = styled(motion.div)`
   }
 `;
 
-export default GameCard;
+export default Game;

@@ -1,19 +1,17 @@
-// Base URL
+//Base URL
 const base_url = "https://api.rawg.io/api/";
+const keyAPI = "key=f04316d043714d6b9f293d0ecbd11853";
 
-//Current Month
-
+//Getting the date
 const getCurrentMonth = () => {
   const month = new Date().getMonth() + 1;
-
   if (month < 10) {
     return `0${month}`;
   } else {
     return month;
   }
 };
-
-//Current Day
+//Getting the date
 const getCurrentDay = () => {
   const day = new Date().getDate();
   if (day < 10) {
@@ -23,41 +21,28 @@ const getCurrentDay = () => {
   }
 };
 
-//CurrentYear and Date
+//Current day/month/year
 const currentYear = new Date().getFullYear();
 const currentMonth = getCurrentMonth();
 const currentDay = getCurrentDay();
 const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
-const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 const lastYear = `${currentYear - 1}-${currentMonth}-${currentDay}`;
-
-export default getCurrentMonth;
+const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 
 //Popular Games
-const popular_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
-const upcoming_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
-const new_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
+const popular_games = `games?${keyAPI}&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
+const upcoming_games = `games?${keyAPI}&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
+const newGames = `games?${keyAPI}&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
 
-//Game Details
-export const gameDetailsUrl = (game_id) =>
-  `${base_url}games/${game_id}?key=f04316d043714d6b9f293d0ecbd11853`;
-
-//Game Screenshots
-export const gameScreenshotUrl = (game_id) =>
-  `${base_url}games/${game_id}/screenshots?key=f04316d043714d6b9f293d0ecbd11853`;
-
-
-export const popularGamesUrl = () => {
-  const url = `${base_url}${popular_games}`;
-  return url;
-};
-
-export const upComingGamesUrl = () => {
-  const url = `${base_url}${upcoming_games}`;
-  return url;
-};
-
-export const newGamesUrl = () => {
-  const url = `${base_url}${new_games}`;
-  return url;
-};
+export const popularGamesURL = () => `${base_url}${popular_games}`;
+export const upcomingGamesURL = () => `${base_url}${upcoming_games}`;
+export const newGamesURL = () => `${base_url}${newGames}`;
+//GAME DETAILS
+export const gameDetailsURL = (game_id) =>
+  `${base_url}games/${game_id}?${keyAPI}`;
+//Game ScreenShots
+export const gameScreenshotURL = (game_id) =>
+  `${base_url}games/${game_id}/screenshots?${keyAPI}`;
+//Searched game
+export const searchGameURL = (game_name) =>
+  `${base_url}games?${keyAPI}&search=${game_name}&page_size=9`;

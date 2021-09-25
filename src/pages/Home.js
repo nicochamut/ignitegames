@@ -2,35 +2,59 @@ import React, { useEffect } from "react";
 import GameDetail from "../components/GameDetail";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { loadGames } from "../actions/gamesActions";
+import { loadGames } from "../actions/gamesAction";
 //Components
-import GameCard from "../components/Game";
+import Game from "../components/Game";
 //Styling and Animation
 import styled from "styled-components";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { fadeIn } from "../animations";
 
 const Home = () => {
-  //get the current location :D
+  //get the current location
   const location = useLocation();
   const pathId = location.pathname.split("/")[2];
-  //Fetch Games
+
+  //FETCH GAMES
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadGames());
   }, [dispatch]);
-  //Get dat damn data back
-  const { popular, upComing, newGames } = useSelector((state) => state.games);
+  //Get that data back
+  const { popular, newGames, upcoming, searched } = useSelector(
+    (state) => state.games
+  );
+
+  console.log(pathId);
   return (
-    <GameList>
-      <AnimateSharedLayout>
+    <GameList variants={fadeIn} initial="hidden" animate="show">
+      <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
-        <h2>-Upcoming Games</h2>
-        <GameStyled layoutId={pathId}>
-          {upComing.map((game) => (
-            <GameCard
+        {searched.length ? (
+          <div className="searched">
+            <h2>Searched Games</h2>
+            <Games>
+              {searched.map((game) => (
+                <Game
+                  name={game.name}
+                  released={game.released}
+                  id={game.id}
+                  image={game.background_image}
+                  key={game.id}
+                />
+              ))}
+            </Games>
+          </div>
+        ) : (
+          ""
+        )}
+        <h2>Upcoming Games</h2>
+        <Games>
+          {upcoming.map((game) => (
+            <Game
               name={game.name}
               released={game.released}
               id={game.id}
@@ -38,12 +62,11 @@ const Home = () => {
               key={game.id}
             />
           ))}
-        </GameStyled>
-
+        </Games>
         <h2>Popular Games</h2>
-        <GameStyled>
+        <Games>
           {popular.map((game) => (
-            <GameCard
+            <Game
               name={game.name}
               released={game.released}
               id={game.id}
@@ -51,12 +74,11 @@ const Home = () => {
               key={game.id}
             />
           ))}
-        </GameStyled>
-
+        </Games>
         <h2>New Games</h2>
-        <GameStyled>
+        <Games>
           {newGames.map((game) => (
-            <GameCard
+            <Game
               name={game.name}
               released={game.released}
               id={game.id}
@@ -64,7 +86,7 @@ const Home = () => {
               key={game.id}
             />
           ))}
-        </GameStyled>
+        </Games>
       </AnimateSharedLayout>
     </GameList>
   );
@@ -77,10 +99,10 @@ const GameList = styled(motion.div)`
   }
 `;
 
-const GameStyled = styled(motion.div)`
-  min-height: 70vh;
+const Games = styled(motion.div)`
+  min-height: 80vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   grid-column-gap: 3rem;
   grid-row-gap: 5rem;
 `;
