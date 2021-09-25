@@ -6,12 +6,19 @@ import { motion } from "framer-motion";
 //Redux
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+//IMAGES
+import playstation from '../img/playstation.svg'
+import nintendo from '../img/nintendo.svg'
+import steam from '../img/steam.svg'
+import xbox from '../img/xbox.svg'
+import gamepad from '../img/gamepad.svg'
+import apple from '../img/apple.svg'
+
 
 const GameDetail = ({ pathId }) => {
   //Data
   const { screen, game, isLoading } = useSelector((state) => state.detail);
   //Exit Detail
-
   const history = useHistory();
   const exitDetailHandler = (e) => {
     const element = e.target;
@@ -20,6 +27,23 @@ const GameDetail = ({ pathId }) => {
       history.push("/");
     }
   };
+  // GET ALL THE PLATAFORMS
+  const getPlataform = (plataform) => {
+    switch(plataform){
+      case "PlayStation 4":
+        return playstation;
+      case "Xbox One":
+        return xbox;
+      case "PC":
+        return steam;
+      case "Nintendo Switch":
+        return nintendo;
+      case "iOS":
+        return apple;
+      default:
+        return gamepad;
+    }
+  }
   return (
     <>
       {!isLoading && (
@@ -34,7 +58,7 @@ const GameDetail = ({ pathId }) => {
                 <motion.h3>Platforms</motion.h3>
                 <Platforms>
                   {game.platforms.map((data) => (
-                    <h3 key={data.platform.name}>{data.platform.name}</h3>
+                    <img key={data.platform.name} alt={data.platform.name} src={getPlataform(data.platform.name)} />
                   ))}
                 </Platforms>
               </Info>
