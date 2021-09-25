@@ -52,6 +52,7 @@ const StyledNav = styled(motion.nav)`
   }
   button {
     font-size: 1.5rem;
+
     border: none;
     padding: 0.5rem 2rem;
     cursor: pointer;
@@ -66,7 +67,7 @@ const StyledNav = styled(motion.nav)`
     }
     button {
       margin-top: 1rem;
-      padding: 0.2rem 1rem;
+      padding: 0.2rem 1rem 0.1rem;
     }
   }
 `;

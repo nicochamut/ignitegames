@@ -13,6 +13,7 @@ import xbox from "../img/xbox.svg";
 import nintendo from "../img/nintendo.svg";
 import apple from "../img/apple.svg";
 import gamepad from "../img/gamepad.svg";
+import close from "../img/close.png";
 //Star Images
 import starEmpty from "../img/star-empty.png";
 import starFull from "../img/star-full.png";
@@ -27,6 +28,11 @@ const GameDetail = ({ pathId }) => {
       document.body.style.overflow = "auto";
       history.push("/");
     }
+  };
+
+  const closeButton = () => {
+    history.push("/");
+    document.body.style.overflow = "auto";
   };
   //Get Stars
   const getStars = () => {
@@ -67,6 +73,7 @@ const GameDetail = ({ pathId }) => {
       {!isLoading && (
         <CardShadow className="shadow" onClick={exitDetailHander}>
           <Detail layoutId={pathId}>
+            <img className="close" onClick={closeButton} src={close} />
             <Stats>
               <div className="rating">
                 <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
@@ -133,6 +140,13 @@ const CardShadow = styled(motion.div)`
   &::-webkit-scrollbar-track {
     background: white;
   }
+  @media screen and (max-width: 480px) {
+    padding: 0;
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0px;
+    }
+  }
 `;
 
 const Detail = styled(motion.div)`
@@ -155,8 +169,25 @@ const Detail = styled(motion.div)`
   p {
     color: white;
   }
+  .close {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #27d997;
+    border-radius: 50%;
+    position: absolute;
+    right: 3%;
+    cursor: pointer;
+    margin-bottom: 2px;
+  }
   @media screen and (max-width: 480px) {
     width: 100%;
+    padding: 1rem;
+    left: 0;
+    border-radius: 0;
+    h3 {
+      font-size: 1rem;
+      color: white;
+    }
   }
 `;
 
@@ -172,6 +203,13 @@ const Stats = styled(motion.div)`
 `;
 const Info = styled(motion.div)`
   text-align: center;
+  @media screen and (max-width: 480px) {
+    display: flex;
+
+    h3 {
+      display: none;
+    }
+  }
 `;
 const Platforms = styled(motion.div)`
   display: flex;
@@ -180,11 +218,7 @@ const Platforms = styled(motion.div)`
     margin-left: 3rem;
   }
   @media screen and (max-width: 480px) {
-    img {
-      width: 1rem;
-      height: 1rem;
-      margin-left: 1rem;
-    }
+    display: none;
   }
 `;
 
