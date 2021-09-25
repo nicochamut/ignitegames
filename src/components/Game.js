@@ -8,8 +8,10 @@ import loadDetail from "../actions/detailsAction";
 //Router
 import { Link } from "react-router-dom";
 
+
 const GameCard = ({ name, released, id, image }) => {
   //Load Details Handler
+  const stringPathId = id.toString();
   const dispatch = useDispatch();
   const loadDetailHandler = () => {
     document.body.style.overflow = "hidden";
@@ -17,11 +19,15 @@ const GameCard = ({ name, released, id, image }) => {
   };
 
   return (
-    <StyledGame onClick={loadDetailHandler}>
+    <StyledGame layoutId={stringPathId} onClick={loadDetailHandler}>
       <Link to={`/game/${id}`}>
-        <h3>{name}</h3>
+        <motion.h3 layout={`title ${stringPathId}`}>{name}</motion.h3>
         <p>{released}</p>
-        <img src={smallImage(image, 640)} alt={name} />
+        <motion.img
+          layoutId={`image${stringPathId}`}
+          src={smallImage(image, 640)}
+          alt={name}
+        />
       </Link>
     </StyledGame>
   );
@@ -29,8 +35,8 @@ const GameCard = ({ name, released, id, image }) => {
 
 const StyledGame = styled(motion.div)`
   min-height: 30vh;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, rgba(184, 183, 183, 0.062), #c5b0b050);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+  background: #ff00001f;
   backdrop-filter: blur(3px);
   overflow: hidden;
   text-align: center;

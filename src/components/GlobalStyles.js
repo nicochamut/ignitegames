@@ -1,7 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import bckground from "../img/bckground.jpg";
-import bckground2 from "../img/bckground2.jpg";
-import bckground3 from "../img/bckground3.jpg";
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -17,31 +15,35 @@ html{
         background: #d6d1d1;
     }
     &::-webkit-scrollbar-thumb{
-        background: #3c194b;
+        background: #6d0000f6;
         border-radius: 1rem;
     }
+    &::-webkit-scrollbar-track {
+    background: #292828;
+  }
     body{
         font-family: 'Montserrat', sans-serif;
-        background-color: #7EDFD0;
-        background-size: 50%;
+        background-image: url(${bckground});
+        /* background-image: linear-gradient(to right,#A8927B 35%, #030201 45%); */
+       
     }
 }
 
 h2{
     font-size: 3rem;
-    color: #505050;
+    color: #ffffff;
 }
 
 h3{
     font-size: 1.3rem;
-    color: #000000;
+    color: #f3f3f3;
     padding: 1.4rem;
 }
 
 p{
     font-size: 1.2rem;
     line-height: 200%;
-    color: #4b4a4a
+    color: #ffffff
 }
 img{
     display:block;

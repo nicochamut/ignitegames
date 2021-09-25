@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-const GameDetail = () => {
+const GameDetail = ({ pathId }) => {
   //Data
   const { screen, game, isLoading } = useSelector((state) => state.detail);
   //Exit Detail
@@ -24,14 +24,14 @@ const GameDetail = () => {
     <>
       {!isLoading && (
         <CardShadow className="shadow" onClick={exitDetailHandler}>
-          <Detail>
+          <Detail layoutId={pathId}>
             <Stats>
               <div className="rating">
-                <h3>{game.name}</h3>
+                <motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
                 <p>Rating: {game.rating}</p>
               </div>
               <Info>
-                <h3>Platforms</h3>
+                <motion.h3>Platforms</motion.h3>
                 <Platforms>
                   {game.platforms.map((data) => (
                     <h3 key={data.platform.name}>{data.platform.name}</h3>
@@ -40,9 +40,10 @@ const GameDetail = () => {
               </Info>
             </Stats>
             <Media>
-              <img
+              <motion.img
                 src={smallImage(game.background_image, 1280)}
                 alt={game.name}
+                layoutId={`image${pathId}`}
               />
             </Media>
             <Description>
@@ -50,7 +51,11 @@ const GameDetail = () => {
             </Description>
             <div className="gallery">
               {screen.results.map((screen) => (
-                <img src={screen.image} alt={screen.name} key={screen.image} />
+                <motion.img
+                  src={smallImage(screen.image, 1280)}
+                  alt={screen.name}
+                  key={screen.image}
+                />
               ))}
             </div>
           </Detail>
@@ -73,10 +78,10 @@ const CardShadow = styled(motion.div)`
     width: 0.5rem;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #ff7676;
+    background-color: #6d0000f6;
   }
   &::-webkit-scrollbar-track {
-    background: white;
+    background: #292828;
   }
 `;
 
@@ -84,10 +89,12 @@ const Detail = styled(motion.div)`
   width: 80%;
   border-radius: 1rem;
   padding: 2rem 5rem;
-  background: white;
+  background: #ff000021;
+  backdrop-filter: blur(7px);
   position: absolute;
   left: 10%;
   color: black;
+  text-shadow: 0px 5px 10px rgba(255, 255, 255, 0.4);
   img {
     width: 100%;
   }
@@ -97,6 +104,12 @@ const Stats = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  div:first-child {
+    h3 {
+      font-size: 2rem;
+      margin-left: -20px;
+    }
+  }
 `;
 
 const Info = styled(motion.div)`
