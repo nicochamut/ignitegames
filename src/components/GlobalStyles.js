@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import bckground from "../img/bckground.jpg";
+import bck2 from "../img/bck2.jpg";
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -23,7 +24,8 @@ html{
   }
     body{
         font-family: 'Montserrat', sans-serif;
-        background-image: url(${bckground});
+        background-image: url(${bck2});
+        background-size: 50%;
         /* background-image: linear-gradient(to right,#A8927B 35%, #030201 45%); */
        
     }
