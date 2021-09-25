@@ -1,13 +1,19 @@
 import axios from "axios";
-import { gameDetailsUrl } from "../api";
+import { gameDetailsUrl, gameScreenshotUrl } from "../api";
 
 export const loadDetail = (id) => async (dispatch) => {
-  const detailData = await axios.get(gameDetailsUrl(id));
+  dispatch({
+    type: "LOADING_STATE",
+  });
 
+  const detailData = await axios.get(gameDetailsUrl(id));
+  const gameDetailData = await axios.get(gameScreenshotUrl(id));
   dispatch({
     type: "GET_DETAIL",
     payload: {
       game: detailData.data,
+      screen: gameDetailData.data,
+      isLoading: true,
     },
   });
 };

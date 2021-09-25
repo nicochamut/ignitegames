@@ -39,7 +39,12 @@ const upcoming_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${curre
 const new_games = `games?key=f04316d043714d6b9f293d0ecbd11853&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
 
 //Game Details
-export const gameDetailsUrl = (game_id) => `${base_url}games?key=f04316d043714d6b9f293d0ecbd11853&/${game_id}`
+export const gameDetailsUrl = (game_id) =>
+  `${base_url}games/${game_id}?key=f04316d043714d6b9f293d0ecbd11853`;
+
+//Game Screenshots
+export const gameScreenshotUrl = (game_id) =>
+  `${base_url}games/${game_id}/screenshots?key=f04316d043714d6b9f293d0ecbd11853`;
 
 
 export const popularGamesUrl = () => {
