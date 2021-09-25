@@ -139,12 +139,23 @@ const Detail = styled(motion.div)`
   width: 80%;
   border-radius: 5rem;
   padding: 2rem 5rem;
-  background: white;
+  background: #270824ab;
+  backdrop-filter: blur(5px);
   position: absolute;
   left: 10%;
-  color: black;
+  color: white;
   z-index: 10;
   img {
+    width: 100%;
+  }
+  h3 {
+    font-size: 2rem;
+    color: white;
+  }
+  p {
+    color: white;
+  }
+  @media screen and (max-width: 480px) {
     width: 100%;
   }
 `;
@@ -167,6 +178,13 @@ const Platforms = styled(motion.div)`
   justify-content: space-evenly;
   img {
     margin-left: 3rem;
+  }
+  @media screen and (max-width: 480px) {
+    img {
+      width: 1rem;
+      height: 1rem;
+      margin-left: 1rem;
+    }
   }
 `;
 
